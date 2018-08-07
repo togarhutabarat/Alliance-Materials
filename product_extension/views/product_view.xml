@@ -1,0 +1,41 @@
+<odoo>
+<data>
+    <record model="ir.ui.view" id="am_product_extension">
+        <field name="name">Alliance Materials product form view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <group name="group_standard_price" position="after">
+                <group name="rock_information">
+                    <field name="sale_partner_id" domain="[('customer','=',True)]" />
+                    <field name="product_type" />
+                    <field name="uas" />
+                </group>
+                <group name="rock_details">
+                    <field name="cast_color" attrs="{'invisible':[('product_type','!=','cast')]}" placeholder="Buff/White/Gray/others" />
+                    <field name="cast_pieces" attrs="{'invisible':[('product_type','!=','cast')]}" placeholder="1-1500" />
+                    
+                    <field name="raw_type" attrs="{'invisible':[('product_type','!=','raw')]}" />
+                    <field name="raw_size" attrs="{'invisible':[('product_type','!=','raw')]}" />
+                    <field name="raw_cut" attrs="{'invisible':[('product_type','!=','raw')]}" />
+
+                    <field name="tv_height1" attrs="{'invisible':[('product_type','!=','tv')]}" />
+                    <field name="tv_height2" attrs="{'invisible':[('product_type','!=','tv')]}" />
+                    <field name="tv_height3" attrs="{'invisible':[('product_type','!=','tv')]}" />
+                    <field name="tv_height4" attrs="{'invisible':[('product_type','!=','tv')]}" />
+                    <field name="tv_size" attrs="{'invisible':[('product_type','!=','tv')]}" />
+                    
+                    <field name="arches_radius" attrs="{'invisible':[('product_type','!=','arches')]}" />
+                    <field name="arches_rise" attrs="{'invisible':[('product_type','!=','arches')]}" />
+                    <field name="arches_plate" attrs="{'invisible':[('product_type','!=','arches')]}" />
+                    
+                    <field name="slabs_template" attrs="{'invisible':[('product_type','!=','slabs')]}" />
+                    
+                    <field name="address_blocks_type" attrs="{'invisible':[('product_type','!=','address')]}" />
+                    <field name="address_blocks_color" attrs="{'invisible':[('product_type','!=','address')]}" />
+                </group>
+            </group>
+        </field>
+    </record>
+</data>
+</odoo>
