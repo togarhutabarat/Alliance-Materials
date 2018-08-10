@@ -1,0 +1,52 @@
+<odoo>
+<data>
+    <record model="ir.ui.view" id="am_mrp_extension">
+        <field name="name">Alliance Materials production form view</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group[1]/group[2]" position="after">
+                <group name="rock_information">
+                    <field name="sale_partner_id" domain="[('customer','=',True)]" />
+                    <field name="product_type" />
+                    <field name="uas" />
+                </group>
+                <group name="rock_details">
+                    <field name="cast_color" attrs="{'invisible':[('product_type','!=','cast')]}" placeholder="Buff/White/Gray/others" />
+                    <field name="cast_pieces" attrs="{'invisible':[('product_type','!=','cast')]}" placeholder="1-1500" />
+                    
+                    <field name="raw_type" attrs="{'invisible':[('product_type','!=','raw')]}" />
+                    <field name="raw_size" attrs="{'invisible':[('product_type','!=','raw')]}" />
+                    <field name="raw_cut" attrs="{'invisible':[('product_type','!=','raw')]}" />
+
+                    <field name="tv_height1" attrs="{'invisible':[('product_type','!=','tv')]}" />
+                    <field name="tv_height2" attrs="{'invisible':[('product_type','!=','tv')]}" />
+                    <field name="tv_height3" attrs="{'invisible':[('product_type','!=','tv')]}" />
+                    <field name="tv_height4" attrs="{'invisible':[('product_type','!=','tv')]}" />
+                    <field name="tv_size" attrs="{'invisible':[('product_type','!=','tv')]}" />
+                    
+                    <field name="arches_radius" attrs="{'invisible':[('product_type','!=','arches')]}" />
+                    <field name="arches_rise" attrs="{'invisible':[('product_type','!=','arches')]}" />
+                    <field name="arches_plate" attrs="{'invisible':[('product_type','!=','arches')]}" />
+                    
+                    <field name="slabs_template" attrs="{'invisible':[('product_type','!=','slabs')]}" />
+                    
+                    <field name="address_blocks_type" attrs="{'invisible':[('product_type','!=','address')]}" />
+                    <field name="address_blocks_color" attrs="{'invisible':[('product_type','!=','address')]}" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="am_mrp_workorder_extension">
+        <field name="name">Alliance Materials work order form view</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workcenter_form_view_inherit" />
+        <field name="arch" type="xml">
+            <field name="workcenter_id" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </field>
+        </field>
+    </record>
+</data>
+</odoo>

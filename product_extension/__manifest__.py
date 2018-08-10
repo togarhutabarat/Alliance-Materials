@@ -19,12 +19,13 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','product'],
+    'depends': ['base','product','mrp'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/product_view.xml',
+        'views/mrp_view.xml'
         # 'views/templates.xml',
     ],
     # only loaded in demonstration mode
