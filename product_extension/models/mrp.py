@@ -78,4 +78,7 @@ class MrpWorkorder(models.Model):
 
     @api.multi
     def name_get(self):
-        return [(wo.id, "%s - %s" % (wo.production_id.name, wo.production_id.sale_partner_id.name)) for wo in self]
+        if wo.production_id.sale_partner_id:
+            return [(wo.id, "%s - %s" % (wo.production_id.name, wo.production_id.sale_partner_id.name)) for wo in self]
+        else:
+            return [(wo.id, "%s" % (wo.production_id.name)) for wo in self]

@@ -9,7 +9,7 @@
                 <group name="rock_information">
                     <field name="sale_partner_id" domain="[('customer','=',True)]" />
                     <field name="product_type" />
-                    <field name="uas" />
+                    <!-- <field name="uas" /> -->
                 </group>
                 <group name="rock_details">
                     <field name="cast_color" attrs="{'invisible':[('product_type','!=','cast')]}" placeholder="Buff/White/Gray/others" />
