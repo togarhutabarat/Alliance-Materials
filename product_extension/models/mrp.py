@@ -78,7 +78,34 @@ class MrpWorkorder(models.Model):
 
     @api.multi
     def name_get(self):
-        if wo.production_id.sale_partner_id:
-            return (wo.id, "%s - %s" % (wo.production_id.name, wo.production_id.sale_partner_id.name))
-        else:
-            return (wo.id, "%s" % (wo.production_id.name))
+        result = []
+        for wo in self:
+            group_productions = self.env['mrp.production'].search([('procurement_group_id','=',wo.production_id.procurement_group_id.id)])
+            customer_name = ""
+            for mo in group_productions:
+                customer_name = mo.sale_partner_id and mo.sale_partner_id.name or ""
+                if customer_name:
+                    break
+            if customer_name:
+                result.append((wo.id, "%s - %s" % (wo.production_id.name, customer_name)))
+            else:
+                result.append((wo.id, "%s" % (wo.production_id.name)))
+        return result
+
+        # return [(wo.id, "%s - %s" % (wo.production_id.name, wo.production_id.sale_partner_id.name)) for wo in self]
+
+        # result = []
+        # for wo in self:
+        #     name = "%s" % (wo.production_id.name)
+        #     group_productions = self.env['mrp.production'].search(['procurement_group_id','=',wo.production_id.procurement_group_id])
+        #     customer_name = ""
+        #     for mo in group_productions:
+        #         customer_name = mo.sale_partner_id and mo.sale_partner_id.name or ""
+        #         if customer_name:
+        #             break
+        #     if customer_name:
+        #         name = "%s - %s" % (wo.production_id.name, customer_name)
+        #     else:
+        #         name = "%s" % (wo.production_id.name)
+        #     result.append((wo.id, name))
+        #     return result
