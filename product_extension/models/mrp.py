@@ -25,6 +25,7 @@ class MrpProduction(models.Model):
         ('dubois','Dubois'),
         ('grandbury','Grandbury'),
         ('brand_blueline','Grandbury Blueline')], 'Raw Rock Type')
+    raw_type_id = fields.Many2one('raw.rock.type','Raw Rock Type')
     raw_cut = fields.Selection([
         ('chopped','Chopped'),
         ('flagstone','FlagStone'),

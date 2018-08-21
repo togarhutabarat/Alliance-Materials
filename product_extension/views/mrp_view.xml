@@ -15,7 +15,7 @@
                     <field name="cast_color" attrs="{'invisible':[('product_type','!=','cast')]}" placeholder="Buff/White/Gray/others" />
                     <field name="cast_pieces" attrs="{'invisible':[('product_type','!=','cast')]}" placeholder="1-1500" />
                     
-                    <field name="raw_type" attrs="{'invisible':[('product_type','!=','raw')]}" />
+                    <field name="raw_type_id" attrs="{'invisible':[('product_type','!=','raw')]}" />
                     <field name="raw_size" attrs="{'invisible':[('product_type','!=','raw')]}" />
                     <field name="raw_cut" attrs="{'invisible':[('product_type','!=','raw')]}" />
 
