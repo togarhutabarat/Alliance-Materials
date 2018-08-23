@@ -9,13 +9,19 @@ class RawRockType(models.Model):
 
     name = fields.Char('Name')
 
+class BlockSize(models.Model):
+
+    _name = "block.size"
+    _description = "Address Block Size"
+
+    name = fields.Char('Size')
+
 class Product(models.Model):
     _inherit = "product.template"
 
     sale_partner_id = fields.Many2one('res.partner','Customer')
     product_type = fields.Selection([
         ('cast','Cast Stone'),
-        ('raw','Rock Raw'),
         ('tv','TV'),
         ('arches','Arches'),
         ('slabs','Slabs'),
@@ -54,7 +60,10 @@ class Product(models.Model):
     arches_rise = fields.Char('Rise')
     arches_plate = fields.Char('Plate')
 
+    polish_level = fields.Selection([('natural','Natural'),
+        ('sanded','Sanded'), ('leathered','Leathered'), ('honed','Honed'), ('polished','Polished')], 'Polish Level')
     slabs_template = fields.Char('Template')
 
     address_blocks_type = fields.Char('Address Block Type')
+    address_blocks_size = fields.Many2one('block.size','Size')
     address_blocks_color = fields.Char('Color')

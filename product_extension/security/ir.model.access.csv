@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_raw_rock_type,access_raw_rock_type,model_raw_rock_type,,1,0,0,0
+access_raw_rock_type,access_raw_rock_type,model_raw_rock_type,,1,1,1,1
+access_block_size,access_block_size,model_block_size,,1,1,1,1

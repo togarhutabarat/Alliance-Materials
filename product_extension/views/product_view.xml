@@ -15,9 +15,9 @@
                     <field name="cast_color" attrs="{'invisible':[('product_type','!=','cast')]}" placeholder="Buff/White/Gray/others" />
                     <field name="cast_pieces" attrs="{'invisible':[('product_type','!=','cast')]}" placeholder="1-1500" />
                     
-                    <field name="raw_type_id" attrs="{'invisible':[('product_type','!=','raw')]}" />
-                    <field name="raw_size" attrs="{'invisible':[('product_type','!=','raw')]}" />
-                    <field name="raw_cut" attrs="{'invisible':[('product_type','!=','raw')]}" />
+                    <field name="raw_type_id" attrs="{'invisible':[('product_type','not in',['slabs','tv'])]}" />
+                    <field name="raw_size" attrs="{'invisible':[('product_type','not in',['slabs','tv'])]}" />
+                    <field name="raw_cut" attrs="{'invisible':[('product_type','not in',['slabs','tv'])]}" />
 
                     <field name="tv_height1" attrs="{'invisible':[('product_type','!=','tv')]}" />
                     <field name="tv_height2" attrs="{'invisible':[('product_type','!=','tv')]}" />
@@ -29,8 +29,10 @@
                     <field name="arches_rise" attrs="{'invisible':[('product_type','!=','arches')]}" />
                     <field name="arches_plate" attrs="{'invisible':[('product_type','!=','arches')]}" />
                     
+                    <field name="polish_level" attrs="{'invisible':[('product_type','!=','slabs')]}" />
                     <field name="slabs_template" attrs="{'invisible':[('product_type','!=','slabs')]}" />
                     
+                    <field name="address_blocks_size" attrs="{'invisible':[('product_type','!=','address')]}" widget="selection" />
                     <field name="address_blocks_type" attrs="{'invisible':[('product_type','!=','address')]}" />
                     <field name="address_blocks_color" attrs="{'invisible':[('product_type','!=','address')]}" />
                 </group>
@@ -53,5 +55,22 @@
     </record>
     <menuitem id="menu_raw_rock_type_stock" name="Raw Rock Type" action="action_raw_rock_type"
         parent="stock.menu_stock_inventory_control" sequence="2"/>
+
+    <record id="action_block_size" model="ir.actions.act_window">
+        <field name="name">Block Size</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">block.size</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="context"></field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to define a new block size.
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_block_size_stock" name="Block Size" action="action_block_size"
+        parent="stock.menu_stock_inventory_control" sequence="3"/>
+
 </data>
 </odoo>

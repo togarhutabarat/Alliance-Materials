@@ -9,15 +9,16 @@
                 <group name="rock_information">
                     <field name="sale_partner_id" domain="[('customer','=',True)]" />
                     <field name="product_type" />
+                    <field name="address" />
                     <!-- <field name="uas" /> -->
                 </group>
                 <group name="rock_details">
                     <field name="cast_color" attrs="{'invisible':[('product_type','!=','cast')]}" placeholder="Buff/White/Gray/others" />
                     <field name="cast_pieces" attrs="{'invisible':[('product_type','!=','cast')]}" placeholder="1-1500" />
                     
-                    <field name="raw_type_id" attrs="{'invisible':[('product_type','!=','raw')]}" />
-                    <field name="raw_size" attrs="{'invisible':[('product_type','!=','raw')]}" />
-                    <field name="raw_cut" attrs="{'invisible':[('product_type','!=','raw')]}" />
+                    <field name="raw_type_id" attrs="{'invisible':[('product_type','not in',['slabs','tv'])]}" />
+                    <field name="raw_size" attrs="{'invisible':[('product_type','not in',['slabs','tv'])]}" />
+                    <field name="raw_cut" attrs="{'invisible':[('product_type','not in',['slabs','tv'])]}" />
 
                     <field name="tv_height1" attrs="{'invisible':[('product_type','!=','tv')]}" />
                     <field name="tv_height2" attrs="{'invisible':[('product_type','!=','tv')]}" />
@@ -29,12 +30,17 @@
                     <field name="arches_rise" attrs="{'invisible':[('product_type','!=','arches')]}" />
                     <field name="arches_plate" attrs="{'invisible':[('product_type','!=','arches')]}" />
                     
+                    <field name="polish_level" attrs="{'invisible':[('product_type','!=','slabs')]}" />
                     <field name="slabs_template" attrs="{'invisible':[('product_type','!=','slabs')]}" />
                     
+                    <field name="address_blocks_size" attrs="{'invisible':[('product_type','!=','address')]}" widget="selection" />
                     <field name="address_blocks_type" attrs="{'invisible':[('product_type','!=','address')]}" />
                     <field name="address_blocks_color" attrs="{'invisible':[('product_type','!=','address')]}" />
                 </group>
             </xpath>
+            <field name="product_id" position="attributes">
+                <attribute name="domain">[('bom_ids', '!=', False), ('bom_ids.active', '=', True), ('bom_ids.type', '=', 'normal'), ('sale_ok','=',True)]</attribute>
+            </field>
         </field>
     </record>
 

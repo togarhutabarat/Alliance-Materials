@@ -4,9 +4,9 @@ class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
     sale_partner_id = fields.Many2one('res.partner','Customer')
+    address = fields.Text('Address')
     product_type = fields.Selection([
         ('cast','Cast Stone'),
-        ('raw','Rock Raw'),
         ('tv','TV'),
         ('arches','Arches'),
         ('slabs','Slabs'),
@@ -45,8 +45,11 @@ class MrpProduction(models.Model):
     arches_rise = fields.Char('Rise')
     arches_plate = fields.Char('Plate')
 
+    polish_level = fields.Selection([('natural','Natural'),
+        ('sanded','Sanded'), ('leathered','Leathered'), ('honed','Honed'), ('polished','Polished')], 'Polish Level')
     slabs_template = fields.Char('Template')
 
+    address_blocks_size = fields.Many2one('block.size','Size')
     address_blocks_type = fields.Char('Address Block Type')
     address_blocks_color = fields.Char('Color')
 
@@ -82,13 +85,13 @@ class MrpWorkorder(models.Model):
         result = []
         for wo in self:
             group_productions = self.env['mrp.production'].search([('procurement_group_id','=',wo.production_id.procurement_group_id.id)])
-            customer_name = ""
+            address = ""
             for mo in group_productions:
-                customer_name = mo.sale_partner_id and mo.sale_partner_id.name or ""
-                if customer_name:
+                address = mo.address
+                if address:
                     break
-            if customer_name:
-                result.append((wo.id, "%s - %s" % (wo.production_id.name, customer_name)))
+            if address:
+                result.append((wo.id, "%s - %s" % (wo.production_id.name, address)))
             else:
                 result.append((wo.id, "%s" % (wo.production_id.name)))
         return result
